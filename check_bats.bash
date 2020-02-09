@@ -15,15 +15,15 @@ function run_integration_tests(){
 choice=$1
 case $choice in
     all)
-      exec time test/test_*.bats
+      exec test/test_*.bats
       ;;
     unit)
-      exec time test/test_unit*.bats
+      exec test/test_unit*.bats
       ;;
     integ | integration)
-      exec time test/test_integ*.bats
+      exec test/test_integ*.bats
       ;;
     *)
-      exec time test/test_*.bats
+      exec test/test_*.bats
       ;;
 esac
