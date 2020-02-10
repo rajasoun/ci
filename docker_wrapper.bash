@@ -10,7 +10,12 @@ set -euo pipefail
 ## ./docker_wrapper.bash run --rm  ubuntu date
 export MSYS_NO_PATHCONV=1
 export MSYS2_ARG_CONV_EXCL='*' 
-os="$(uname -o)"
+
+case "$OSTYPE" in
+    *msys*|*cygwin*) os="$(uname -o)" ;;
+    *) os="$(uname)";;
+esac
+
 realdocker="$(which -a docker | grep -v "$(readlink -f "$0")" | head -1)"
 if [[ "$os" == "Msys" ]] || [[ "$os" == "Cygwin" ]]; then
     printf "%s\0" "$@" > /tmp/args.txt
