@@ -16,12 +16,12 @@ case "$OSTYPE" in
     *) os="$(uname)";;
 esac
 
-realdocker="$(which -a docker | grep -v "$(readlink -f "$0")" | head -1)"
 if [[ "$os" == "Msys" ]] || [[ "$os" == "Cygwin" ]]; then
+    realdocker="$(which -a docker | grep -v "$(readlink -f "$0")" | head -1)"
     printf "%s\0" "$@" > /tmp/args.txt
     # --tty or -t requires winpty
     if grep -ZE '^--tty|^-[^-].*t|^-t.*' /tmp/args.txt; then
         exec winpty /bin/bash -c "xargs -0a /tmp/args.txt '$realdocker'"
     fi
 fi
-exec "$realdocker" "$@"
+exec docker "$@"
