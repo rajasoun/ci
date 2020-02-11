@@ -24,6 +24,6 @@ case $choice in
       exec test/test_integ*.bats
       ;;
     *)
-      exec test/test_*.bats
+      exec test/test_*.bats "$@"
       ;;
 esac
