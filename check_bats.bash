@@ -1,29 +1,60 @@
 #!/usr/bin/env bash
 
 function run_all_tests(){
-    exec test/test_*.bats
+    exec test/**/test_*.bats -t
 }
 
 function run_unit_tests(){
-   exec test/test_unit*.bats
+   exec test/unit/*.bats -t
 }
 
 function run_integration_tests(){
-   exec test/test_integ*.bats
+   exec test/integration/*.bats -t
+}
+
+function run_docker_tests(){
+   exec test/integration/test_docker*.bats  -t
+}
+
+function run_tests_based_on_filter(){
+   exec test/**/test_*.bats "$@" -t
+}
+
+
+function print_line(){
+    echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 }
 
 choice=$1
 case $choice in
     all)
-      exec test/test_*.bats
+      echo "                                              Unit & Integration Tests                                          "
+      print_line
+      run_all_tests
+      print_line
       ;;
     unit)
-      exec test/test_unit*.bats
+      echo "                                                     Unit Tests                                                 "
+      print_line
+      run_unit_tests
+      print_line
       ;;
     integ | integration)
-      exec test/test_integ*.bats
+      echo "                                                   Integration Tests                                            "
+      print_line
+      run_integration_tests
+      print_line
+      ;;
+    docker)
+      echo "                                                Docker Integration Tests                                        "
+      print_line
+      run_docker_tests
+      print_line
       ;;
     *)
-      exec test/test_*.bats "$@"
+      echo "                                                      Test Filters                                              "
+      print_line
+      run_tests_based_on_filter
+      print_line
       ;;
 esac
