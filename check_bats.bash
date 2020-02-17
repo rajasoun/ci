@@ -9,7 +9,7 @@ function run_unit_tests(){
 }
 
 function run_integration_tests(){
-   exec test/integration/test_integ*. -t
+   exec test/integration/test_integration*.bats -t
 }
 
 function run_docker_tests(){
