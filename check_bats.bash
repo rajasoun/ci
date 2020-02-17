@@ -54,7 +54,7 @@ case $choice in
     *)
       echo "                                                      Test Filters                                              "
       print_line
-      run_tests_based_on_filter
+      run_tests_based_on_filter "$@"
       print_line
       ;;
 esac
