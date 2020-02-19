@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-function run_pre_condition_tests(){
+function run_host_pre_condition_tests(){
     exec test/pre_conditions/test_pre*.bats -t
+}
+
+function run_docker_pre_condition_tests(){
+   exec test/pre_conditions/test_docker*.bats -t 
 }
 
 function run_all_tests(){
@@ -18,9 +22,8 @@ function run_integration_tests(){
 
 function run_docker_tests(){
    exec test/integration/test_docker*.bats  -t
-   exec test/pre_conditions/test_docker*.bats -t 
 }
-
+   
 function run_tests_based_on_filter(){
    exec test/**/test_*.bats "$@" -t
 }
@@ -54,12 +57,13 @@ case $choice in
       echo "                                                Docker Integration Tests                                        "
       print_line
       run_docker_tests
+      run_docker_pre_condition_tests
       print_line
       ;;
     precondition)
       echo "                                                Host Pre Condition Tests                                        "
       print_line
-      run_pre_condition_tests
+      run_host_pre_condition_tests
       print_line
       ;;
     *)
