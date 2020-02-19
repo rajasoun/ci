@@ -59,13 +59,13 @@ case $choice in
       run_docker_tests
       print_line
       ;;
-    host_precondition)
+    host_precondition | *host_pre*)
       echo "                                                Host Pre Condition Tests                                        "
       print_line
       run_host_pre_condition_tests
       print_line
       ;;
-    host_docker_precondition)
+    host_docker_precondition | *host_docker_*)
       echo "                                            Host Pre Condition Tests for Docker                                  "
       print_line
       run_docker_pre_condition_tests
