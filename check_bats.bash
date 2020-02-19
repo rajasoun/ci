@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 
 function run_host_pre_condition_tests(){
-    exec test/pre_conditions/test_pre*.bats -t
+  test/pre_conditions/test_pre*.bats -t
 }
 
 function run_docker_pre_condition_tests(){
-   exec test/pre_conditions/test_docker*.bats -t 
+  test/pre_conditions/test_docker*.bats -t 
 }
 
 function run_all_tests(){
-    exec test/**/test_*.bats -t
+  test/**/test_*.bats -t
 }
 
 function run_unit_tests(){
-   exec test/unit/*.bats -t
+  test/unit/*.bats -t
 }
 
 function run_integration_tests(){
-   exec test/integration/test_integration*.bats -t
+  test/integration/test_integration*.bats -t
 }
 
 function run_docker_tests(){
-   exec test/integration/test_docker*.bats  -t
+  test/integration/test_docker*.bats  -t
 }
    
 function run_tests_based_on_filter(){
-   exec test/**/test_*.bats "$@" -t
+  test/**/test_*.bats "$@" -t
 }
 
 
