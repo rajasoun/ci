@@ -57,13 +57,18 @@ case $choice in
       echo "                                                Docker Integration Tests                                        "
       print_line
       run_docker_tests
-      run_docker_pre_condition_tests
       print_line
       ;;
-    precondition)
+    host_precondition)
       echo "                                                Host Pre Condition Tests                                        "
       print_line
       run_host_pre_condition_tests
+      print_line
+      ;;
+    host_docker_precondition)
+      echo "                                            Host Pre Condition Tests for Docker                                  "
+      print_line
+      run_docker_pre_condition_tests
       print_line
       ;;
     *)
