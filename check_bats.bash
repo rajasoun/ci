@@ -20,6 +20,10 @@ function run_integration_tests(){
   exec test/integration/test_integration*.bats -t || return 1
 }
 
+function run_api_tests(){
+  exec test/api/test_*.bats "$@" -t || return 1
+}
+
 function run_docker_tests(){
   exec test/integration/test_docker*.bats  -t || return 1
 }
@@ -28,7 +32,6 @@ function run_tests_based_on_filter(){
   exec test/**/test_*.bats "$@" -t || return 1
 }
 
-
 function print_line(){
     echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 }
@@ -36,7 +39,7 @@ function print_line(){
 choice=$1
 case $choice in
     all)
-      echo "                                              Unit & Integration Tests                                          "
+      echo "                                              Unit, Integration & API Tests                                      "
       print_line
       run_all_tests || return 1
       print_line
@@ -51,6 +54,12 @@ case $choice in
       echo "                                                   Integration Tests                                            "
       print_line
       run_integration_tests || return 1
+      print_line
+      ;;
+    api)
+      echo "                                                        API Tests                                               "
+      print_line
+      run_api_tests || return 1
       print_line
       ;;
     docker)
