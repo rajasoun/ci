@@ -33,11 +33,11 @@ function run_tests_based_on_filter(){
 }
 
 function run_infra_base_tests(){
-  exec export MODE=api && export STAGE="-m base" && ./multipass.bash test_infra
+  export MODE=api && export STAGE="-m base" && exec ./multipass.bash test_infra
 }
 
 function run_infra_tests(){
-  exec export MODE=api && export STAGE= && ./multipass.bash test_infra
+  export MODE=api && export STAGE= && exec ./multipass.bash test_infra
 }
 
 function print_line(){
