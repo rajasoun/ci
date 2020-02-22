@@ -32,6 +32,14 @@ function run_tests_based_on_filter(){
   exec test/**/test_*.bats "$@" -t || return 1
 }
 
+function run_infra_base_tests(){
+  exec export MODE=api && export STAGE="-m base" && ./multipass.bash test_infra
+}
+
+function run_infra_tests(){
+  exec export MODE=api && export STAGE= && ./multipass.bash test_infra
+}
+
 function print_line(){
     echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 }
@@ -78,6 +86,18 @@ case $choice in
       echo "                                            Host Pre Condition Tests for Docker                                  "
       print_line
       run_docker_pre_condition_tests || return 1
+      print_line
+      ;;
+    infra-base)
+      echo "                                                   Test Infra Base Tests                                        "
+      print_line
+      run_infra_base_tests || return 1
+      print_line
+      ;;
+    infra)
+      echo "                                               Test Infra Base & Postcondition Tests                            "
+      print_line
+      run_infra_tests || return 1
       print_line
       ;;
     *)
