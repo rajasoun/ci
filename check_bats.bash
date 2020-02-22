@@ -33,11 +33,11 @@ function run_tests_based_on_filter(){
 }
 
 function run_infra_base_tests(){
-  export MODE=api && export STAGE="-m base" && exec ./multipass.bash test_infra
+  export MODE=api && exec ./multipass.bash test_base_infra
 }
 
 function run_infra_tests(){
-  export MODE=api && export STAGE= && exec ./multipass.bash test_infra
+  export MODE=api && exec ./multipass.bash test_infra
 }
 
 function print_line(){
@@ -88,7 +88,7 @@ case $choice in
       run_docker_pre_condition_tests || return 1
       print_line
       ;;
-    infra-base)
+    base-infra)
       echo "                                                   Test Infra Base Tests                                        "
       print_line
       run_infra_base_tests || return 1
